@@ -1,0 +1,28 @@
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Currency conversion fee,Currency (Currency conversion fee)
+Deposit,2021-01-05 09:00:00,,,,'Bank Transfer',DEP21A,,,,,,,500.00,"EUR",,,
+Interest on cash,2021-01-31 21:01:00,,,,'Interest on cash',IOC21A,,,,,,,0.01,"EUR",,,
+Lending interest,2021-02-02 02:10:00,,,,'Share lending interest',SLI21A,,,,,,,0.01,"EUR",,,
+Market buy,2021-02-05 14:30:01,US0378331005,AAPL,Apple,,B21AAPL1,1.0000000000,135.0000000000,USD,1.21000000,,"EUR",111.57,"EUR",,,0.20,"EUR"
+Dividend (Dividend),2021-02-10 11:30:00,US5949181045,MSFT,Microsoft,,DIV21MSFT1,0.1000000000,0.560000,USD,Not available,,,0.05,"EUR",0.01,USD,,
+Market buy,2021-02-10 14:31:00,US5949181045,MSFT,Microsoft,,B21MSFT1,0.5000000000,240.0000000000,USD,1.21000000,,"EUR",99.17,"EUR",,,0.20,"EUR"
+Market buy,2021-02-15 10:05:12,US4581401001,INTC,Intel,,B21INTC1,1.5000000000,61.0000000000,USD,1.21000000,,"EUR",75.62,"EUR",,,0.20,"EUR"
+Deposit,2021-03-01 08:12:00,,,,'Bank Transfer',DEP21B,,,,,,,200.00,"EUR",,,
+Market buy,2021-03-02 13:30:00,US88160R1014,TSLA,Tesla,,B21TSLA1,0.0200000000,700.0000000000,USD,1.20000000,,"EUR",11.67,"EUR",,,0.05,"EUR"
+Interest on cash,2021-03-31 21:01:00,,,,'Interest on cash',IOC21B,,,,,,,0.01,"EUR",,,
+Market sell,2021-04-05 15:00:00,US0378331005,AAPL,Apple,,S21AAPL1,0.3000000000,140.0000000000,USD,1.19000000,1.23,"EUR",34.50,"EUR",,,0.05,"EUR"
+Market buy,2021-04-12 14:33:22,US67066G1040,NVDA,Nvidia,,B21NVDA1,0.1000000000,550.0000000000,USD,1.20000000,,"EUR",45.83,"EUR",,,0.10,"EUR"
+Dividend (Dividend),2021-05-10 10:00:00,US0378331005,AAPL,Apple,,DIV21AAPL1,0.1000000000,0.205000,USD,Not available,,,0.02,"EUR",0.00,USD,,
+Lending interest,2021-05-15 02:20:00,,,,'Share lending interest',SLI21B,,,,,,,0.01,"EUR",,,
+Market sell,2021-06-01 16:10:04,US4581401001,INTC,Intel,,S21INTC1,0.2000000000,65.0000000000,USD,1.19000000,0.40,"EUR",10.92,"EUR",,,0.02,"EUR"
+Market buy,2021-06-15 12:00:00,US0378331005,AAPL,Apple,,B21AAPL2,0.5000000000,128.0000000000,USD,1.19000000,,"EUR",53.78,"EUR",,,0.10,"EUR"
+Interest on cash,2021-06-30 21:01:00,,,,'Interest on cash',IOC21C,,,,,,,0.01,"EUR",,,
+Market buy,2021-07-20 13:45:00,US92343V1044,VZ,Verizon Communications,,B21VZ1,0.7000000000,56.0000000000,USD,1.18000000,,"EUR",33.22,"EUR",,,0.05,"EUR"
+Dividend (Dividend),2021-08-02 12:05:00,US92343V1044,VZ,Verizon Communications,,DIV21VZ1,0.7000000000,0.520000,USD,Not available,,,0.31,"EUR",0.07,USD,,
+Market sell,2021-09-10 14:41:00,US5949181045,MSFT,Microsoft,,S21MSFT1,0.2000000000,300.0000000000,USD,1.16000000,1.10,"EUR",51.72,"EUR",,,0.05,"EUR"
+Market buy,2021-10-05 10:09:33,US02079K3059,GOOGL,Alphabet (Class A),,B21GOOGL1,0.0100000000,2700.0000000000,USD,1.15000000,,"EUR",23.48,"EUR",,,0.05,"EUR"
+Interest on cash,2021-10-31 21:01:00,,,,'Interest on cash',IOC21D,,,,,,,0.01,"EUR",,,
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Currency conversion fee,Currency (Currency conversion fee)
+Deposit,2021-01-10 10:00:00,,,,,TX2021A,,,,,,,500.00,EUR,,,
+Market buy,2021-01-15 14:30:01,US0378331005,AAPL,Apple,,ORD2021A,1.0000000000,130.0000000000,USD,1.20000000,,EUR,108.33,EUR,,,0.20,EUR
+Market buy,2021-03-01 14:30:02,US0378331005,AAPL,Apple,,ORD2021B,1.0000000000,120.0000000000,USD,1.19000000,,EUR,100.84,EUR,,,0.20,EUR
+

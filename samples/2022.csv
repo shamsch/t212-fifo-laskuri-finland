@@ -1,0 +1,25 @@
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Currency conversion fee,Currency (Currency conversion fee)
+Deposit,2022-01-05 09:00:00,,,,'Bank Transfer',DEP22A,,,,,,,300.00,"EUR",,,
+Interest on cash,2022-01-31 21:01:00,,,,'Interest on cash',IOC22A,,,,,,,0.01,"EUR",,,
+Market buy,2022-02-01 14:30:00,US0378331005,AAPL,Apple,,B22AAPL1,0.4000000000,170.0000000000,USD,1.12000000,,"EUR",60.71,"EUR",,,0.05,"EUR"
+Dividend (Dividend),2022-02-15 12:05:00,US0378331005,AAPL,Apple,,DIV22AAPL1,0.4000000000,0.220000,USD,Not available,,,0.08,"EUR",0.02,USD,,
+Market sell,2022-03-01 14:37:56,US61174X1090,MNST,Monster Beverage,,S22MNST1,0.1500000000,58.6400000000,USD,1.10000000,0.24,"EUR",8.12,"EUR",,,0.01,"EUR"
+Market buy,2022-03-10 14:30:02,US5494981039,LCID,Lucid,,B22LCID1,2.0000000000,25.5600000000,USD,1.09000000,,"EUR",46.89,"EUR",,,0.05,"EUR"
+Market buy,2022-04-01 10:31:39,US00206R1023,T,AT&T,,B22T1,1.0000000000,22.3500000000,USD,1.10000000,,"EUR",20.32,"EUR",,,0.02,"EUR"
+Dividend (Dividend),2022-04-15 10:31:39,US00206R1023,T,AT&T,,DIV22T1,1.0000000000,0.278000,USD,Not available,,,0.24,"EUR",0.05,USD,,
+Market buy,2022-05-02 11:18:46,US6701002056,NVO,Novo Nordisk,,B22NVO1,0.2500000000,110.0000000000,USD,1.07000000,,"EUR",25.70,"EUR",,,0.03,"EUR"
+Lending interest,2022-05-05 02:16:22,,,,'Share lending interest',SLI22A,,,,,,,0.01,"EUR",,,
+Market sell,2022-06-03 14:48:22,US88160R1014,TSLA,Tesla,,S22TSLA1,0.0500000000,700.0000000000,USD,1.08000000,5.00,"EUR",32.41,"EUR",,,0.05,"EUR"
+Market buy,2022-06-15 14:30:06,US30303M1027,META,Meta Platforms,,B22META1,0.0100000000,200.0000000000,USD,1.08000000,,"EUR",1.85,"EUR",,,
+Interest on cash,2022-06-30 21:01:00,,,,'Interest on cash',IOC22B,,,,,,,0.01,"EUR",,,
+Market buy,2022-07-05 13:37:18,US5949181045,MSFT,Microsoft,,B22MSFT1,0.0200000000,260.0000000000,USD,1.06000000,,"EUR",4.91,"EUR",,,0.01,"EUR"
+Market buy,2022-08-08 13:30:05,US67066G1040,NVDA,Nvidia,,B22NVDA1,0.0300000000,210.0000000000,USD,1.05000000,,"EUR",6.00,"EUR",,,0.01,"EUR"
+Dividend (Dividend),2022-09-12 11:38:43,US5949181045,MSFT,Microsoft,,DIV22MSFT1,0.0200000000,0.620000,USD,Not available,,,0.01,"EUR",0.00,USD,,
+Market sell,2022-10-02 13:30:02,US5949181045,MSFT,Microsoft,,S22MSFT1,0.0100000000,250.0000000000,USD,1.03000000,0.10,"EUR",2.43,"EUR",,,0.00,"EUR"
+Interest on cash,2022-10-31 21:01:00,,,,'Interest on cash',IOC22C,,,,,,,0.01,"EUR",,,
+Withdrawal,2022-11-20 09:58:59,,,,'Sent to Bank Account',WD22A,,,,,,,-200.00,"EUR",,,
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Currency conversion fee,Currency (Currency conversion fee)
+Dividend (Dividend),2022-02-01 12:00:00,US0378331005,AAPL,Apple,,,1.0000000000,0.220000,USD,Not available,,,0.19,EUR,0.03,USD,,
+Market sell,2022-06-10 15:00:00,US0378331005,AAPL,Apple,,ORD2022S,0.5000000000,140.0000000000,USD,1.05000000,10.00,EUR,66.67,EUR,,,0.10,EUR
+Market buy,2022-09-20 13:00:00,US0378331005,AAPL,Apple,,ORD2022B,0.5000000000,150.0000000000,USD,1.00000000,,EUR,75.00,EUR,,,0.10,EUR
+
