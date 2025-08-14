@@ -20,7 +20,14 @@
    Return sorted seq of transactions."
   [file]
   ;; TODO: implement
-  [])
+  (with-open [reader (io/reader file)]
+    (let [csv (doall (csv/read-csv reader))
+          [header & rows] csv]
+      (println header)
+      (doseq [row rows]
+        (println row)))))
+      
+    
 
 ;; --- FIFO Logic ---
 (defn add-purchase
@@ -68,14 +75,6 @@
 
 ;; --- REPL playground ---
 (comment
-  (def sample-file "")
-
-  (def txns (load-transactions sample-file))
-  (take 5 txns)
-
-  (def result (calculate-fifo txns))
-
-  (print-summary result)
-
-  (:positions result)
-  (:sales result))
+  (def sample-file "samples/2021.csv")
+  (load-transactions sample-file)
+  )
