@@ -10,7 +10,7 @@ This will evolve into a full-stack application featuring:
 
 ## License
 
-Copyright © 2025 FIXME
+Copyright © 2025 Shamsur Chowdhury
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
