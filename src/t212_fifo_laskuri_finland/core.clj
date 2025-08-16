@@ -9,6 +9,34 @@
 (defrecord Lot [quantity price date])
 (defrecord Sale [symbol quantity sold-price cost-basis gain-loss date])
 
+;; --- Utility functions ---
+(defn parse-trx
+  "Parse each line of the CSV. Destructure the values. Pass them on."
+  [line]
+  (let [[action time _isin ticker _name _notes _id quantity price _currency & _rest] line]
+    (when (#{"Market buy" "Market sell"} action)
+      {:action action
+       :time time
+       :ticker ticker
+       :quantity (Double/parseDouble quantity)
+       :price (Double/parseDouble price)})))
+
+(defn map-action-type-to-string 
+  "Take action type from the CSV format and return either string 'buy' or 'sell' based on 'Market buy' or 'Market sell'"
+  [action]
+  ({"Market buy" "buy" "Market sell" "sell"} action))
+
+(defn add-trx-to-record
+     "Converts parsed transaction map to Transaction record and adds to collection"
+     [transactions trx-map]
+     (let [transaction-record (->Transaction
+                               (:time trx-map)
+                               (map-action-type-to-string (:action trx-map))
+                               (:ticker trx-map)
+                               (:quantity trx-map)
+                               (:price trx-map))]
+       (conj transactions transaction-record)))
+
 ;; --- CSV Parsing ---
 (defn load-transactions
   "Parse T212 CSV into `Transaction` records.
