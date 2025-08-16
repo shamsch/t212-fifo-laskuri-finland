@@ -47,15 +47,14 @@
    - Parse date, quantity, and price
    Return sorted seq of transactions."
   [file]
-  ;; TODO: implement
   (with-open [reader (io/reader file)]
     (let [csv (doall (csv/read-csv reader))
-          [header & rows] csv]
-      (println header)
-      (doseq [row rows]
-        (println row)))))
-      
-    
+          [_header & rows] csv
+          trx (->> rows
+                   (map parse-trx)
+                   (filter some?)
+                   (reduce add-trx-to-record []))]
+      trx)))
 
 ;; --- FIFO Logic ---
 (defn add-purchase
