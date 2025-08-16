@@ -1,6 +1,12 @@
 # t212-fifo-laskuri-finland
 
-This is a tax calculator which uses the FIFO method to calculate one owes to Verohallinto if they provide their Trading 212 yearly investment data in CSV format. 
+A tax calculator that uses the FIFO (First In, First Out) method to calculate capital gains tax owed to Verohallinto (Finnish Tax Administration) based on Trading 212 yearly investment data provided in CSV format. This project is being developed at a gradual pace as I learn Clojure application development.
+
+## Plan
+
+This will evolve into a full-stack application featuring:
+- **Frontend**: React or Reagent (ClojureScript) - decision pending
+- **Backend**: Clojure application packaged as an AWS Lambda function, containerized using AWS Lambda's Java/JVM runtime container.
 
 ## License
 
