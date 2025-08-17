@@ -21,21 +21,21 @@
        :quantity (Double/parseDouble quantity)
        :price (Double/parseDouble price)})))
 
-(defn map-action-type-to-string 
+(defn map-action-type-to-string
   "Take action type from the CSV format and return either string 'buy' or 'sell' based on 'Market buy' or 'Market sell'"
   [action]
   ({"Market buy" "buy" "Market sell" "sell"} action))
 
 (defn add-trx-to-record
-     "Converts parsed transaction map to Transaction record and adds to collection"
-     [transactions trx-map]
-     (let [transaction-record (->Transaction
-                               (:time trx-map)
-                               (map-action-type-to-string (:action trx-map))
-                               (:ticker trx-map)
-                               (:quantity trx-map)
-                               (:price trx-map))]
-       (conj transactions transaction-record)))
+  "Converts parsed transaction map to Transaction record and adds to collection"
+  [transactions trx-map]
+  (let [transaction-record (->Transaction
+                            (:time trx-map)
+                            (map-action-type-to-string (:action trx-map))
+                            (:ticker trx-map)
+                            (:quantity trx-map)
+                            (:price trx-map))]
+    (conj transactions transaction-record)))
 
 ;; --- CSV Parsing ---
 (defn load-transactions
