@@ -58,10 +58,9 @@
 
 ;; --- FIFO Logic ---
 (defn add-purchase
-  "Add purchase lot to positions map (FIFO queue per symbol).
-   TODO: conj new lot to symbol's vector in positions."
+  "Add a purchase lot to the positions map for the given transaction."
   [positions txn]
-  ;; TODO: implement
+  ;; TODO: implement - should add txn as a lot to positions[symbol]
   positions)
 
 
@@ -158,6 +157,12 @@
 
 ;; --- REPL playground ---
 (comment
+  ;; loading csv file
   (def sample-file "samples/2021.csv")
   (load-transactions sample-file)
-  )
+
+  ;; testing consuming lot
+  (def test-lots [{:ticker :AAPL :quantity 30 :price 100 :date "2023-01-01"}
+                  {:ticker :AAPL :quantity 40 :price 110 :date "2023-01-02"}
+                  {:ticker :AAPL :quantity 20 :price 120 :date "2023-01-03"}])
+  (consume-lots test-lots 60))
