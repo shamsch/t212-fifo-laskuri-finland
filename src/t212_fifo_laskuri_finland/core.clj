@@ -37,6 +37,16 @@
                             (:price trx-map))]
     (conj transactions transaction-record)))
 
+(defn sanitize-header-name
+  "Header can have whitespace or symobols e.g / . ( ) etc. Replace them with hyphen and remove them where possible."
+  [header]
+  (-> header
+      str/lower-case
+      (str/replace #"[(){}\\[\\]]" "")  ; remove brackets and parentheses
+      (str/replace #"\s+|/|\." "-")     ; replace whitespace, /, . with hyphens
+      (str/replace #"-+" "-")           ; collapse multiple hyphens to single
+      keyword))
+
 ;; --- CSV Parsing ---
 (defn load-transactions
   "Parse T212 CSV into `Transaction` records.
@@ -49,12 +59,12 @@
   [file]
   (with-open [reader (io/reader file)]
     (let [csv (doall (csv/read-csv reader))
-          [_header & rows] csv
-          trx (->> rows
-                   (map parse-trx)
-                   (filter some?)
-                   (reduce add-trx-to-record []))]
-      trx)))
+          [header & rows] csv
+          keyworded-header (map sanitize-header-name header)
+          csv-row-map (map #(zipmap keyworded-header %) rows)]
+      csv-row-map
+    )) 
+)
 
 ;; --- FIFO Logic ---
 (defn add-purchase
@@ -158,7 +168,7 @@
 ;; --- REPL playground ---
 (comment
   ;; loading csv file
-  (def sample-file "samples/2021.csv")
+  (def sample-file "samples/2022.csv")
   (load-transactions sample-file)
 
   ;; testing consuming lot
