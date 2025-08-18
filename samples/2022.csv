@@ -1,0 +1,21 @@
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Stamp duty reserve tax,Currency (Stamp duty reserve tax),Currency conversion fee,Currency (Currency conversion fee)
+Deposit,2022-03-02 07:44:34,,,,Bank Transfer,d8c7e8e6-15fe-4e07-b7e6-74d37c05d709,,,,,,,100.0,EUR,,,,,,
+Deposit,2022-03-04 08:00:32,,,,Free Shares Promotion,b020ceb1-6596-40fa-9556-21c316125edf,,,,,,,6.04,EUR,,,,,,
+Deposit,2022-03-14 17:37:25,,,,Transaction ID: WQT95TWG56DPV832,c34b5ae9-d566-46e9-83f9-6aed2ecd70bd,,,,,,,50.0,EUR,,,,,,
+Deposit,2022-03-04 07:29:07,,,,Bank Transfer,bf3fef98-8a02-481a-b8ae-3cd65d0c5bf1,,,,,,,100.0,EUR,,,,,,
+Dividend (Ordinary),2022-08-12 07:58:45,US0378331005,AAPL,Apple,,,0.3,0.1955,USD,Not available,,,0.06,EUR,0.01,USD,,,,
+Market sell,2022-03-28 15:53:16,US88160R1014,TSLA,Tesla,,EOF1849651642,0.01013186,1080.69,USD,1.09713424,2.97,EUR,9.97,EUR,,,,,0.01,EUR
+Market buy,2022-03-09 15:57:40,US62914V1061,NIO,NIO,,EOF1825577297,1.0,20.2,USD,1.10442864,,EUR,18.32,EUR,,,,,0.03,EUR
+Market buy,2022-04-05 13:30:16,US90184L1026,TWTR,Twitter,,EOF1860924538,0.2,53.8,USD,1.09572301,,EUR,9.83,EUR,,,,,0.01,EUR
+Market buy,2022-03-14 17:38:26,US0378331005,AAPL,Apple,,EOF1831446387,0.3,150.71,USD,1.09740291,,EUR,41.26,EUR,,,,,0.06,EUR
+Market sell,2022-10-10 13:30:53,US90184L1026,TWTR,Twitter,,EOF2086499532,0.2,49.54,USD,0.97042115,0.39,EUR,10.19,EUR,,,,,0.02,EUR
+Market buy,2022-03-14 18:00:44,US62914V1061,NIO,NIO,,EOF1831450078,0.5,14.37,USD,1.09694656,,EUR,6.56,EUR,,,,,0.01,EUR
+Market buy,2022-04-13 10:52:05,GB00B7KR2P84,EZJ,easyJet,,EOF1872019662,1.0,535.2,GBX,83.23483670,,EUR,6.47,EUR,,,0.03,EUR,0.01,EUR
+Market buy,2022-03-02 14:30:05,US30303M1027,META,Meta Platforms,,EOF1813236237,0.2,204.86,USD,1.10975081,,EUR,36.98,EUR,,,,,0.06,EUR
+Dividend (Ordinary),2022-11-11 13:57:04,US0378331005,AAPL,Apple,,,0.4,0.1955,USD,Not available,,,0.08,EUR,0.01,USD,,,,
+Market sell,2022-03-22 15:23:59,US64110L1061,NFLX,Netflix,,EOF1842871617,0.025,385.33,USD,1.10346506,0.34,EUR,8.72,EUR,,,,,0.01,EUR
+Market buy,2022-10-11 13:30:08,US0378331005,AAPL,Apple,,EOF2087933796,0.1,139.73,USD,0.97169680,,EUR,14.4,EUR,,,,,0.02,EUR
+Dividend (Ordinary),2022-05-13 10:41:13,US0378331005,AAPL,Apple,,,0.3,0.1955,USD,Not available,,,0.06,EUR,0.01,USD,,,,
+Market buy,2022-03-03 15:38:21,US30303M1027,META,Meta Platforms,,EOF1815149989,0.3,205.04,USD,1.10613199,,EUR,55.69,EUR,,,,,0.08,EUR
+Deposit,2022-10-11 11:00:13,,,,Transaction ID: DTH8MS8TGSRMMM52,49cf58fc-674d-41ad-a30f-3d92d6898021,,,,,,,5.0,EUR,,,,,,
+Withdrawal,2022-03-22 22:02:21,,,,Sent to card *6588,fe0a6efb-3fb9-4547-9faa-161c8f7e0393,,,,,,,-10.0,EUR,,,,,,

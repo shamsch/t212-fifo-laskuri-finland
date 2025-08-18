@@ -1,0 +1,21 @@
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Currency conversion fee,Currency (Currency conversion fee)
+Market sell,2023-03-22 18:10:52,US30303M1027,META,Meta Platforms,,EOF2327267141,0.1,205.22,USD,1.08409931,0.42,EUR,18.9,EUR,,,0.03,EUR
+Market buy,2023-10-24 13:30:04,US88160R1014,TSLA,Tesla,,EOF5102381477,0.05,216.58,USD,1.06166666,,EUR,10.22,EUR,,,0.02,EUR
+Deposit,2023-08-21 22:28:08,,,,Transaction ID: F5HMR9HCV7JQ4932,e44895b8-8d54-4e2f-b3e7-4707e9026366,,,,,,,50.0,EUR,,,,
+Market sell,2023-06-05 16:01:28,US88160R1014,TSLA,Tesla,,EOF3072553974,0.12,217.23,USD,1.07185855,0.96,EUR,24.28,EUR,,,0.04,EUR
+Dividend (Dividends paid by us corporations),2023-06-09 12:15:56,US5949181045,MSFT,Microsoft,,,0.1,0.578,USD,Not available,,,0.05,EUR,0.01,USD,,
+Market buy,2023-07-06 11:52:14,US01609W1027,AHLA,Alibaba,,EOF3154146453,0.075,77.2,EUR,1.00000000,,EUR,5.79,EUR,,,,
+Dividend (Dividend),2023-11-01 10:07:17,US00206R1023,T,AT&T,,,1.0,0.235875,USD,Not available,,,0.22,EUR,0.04,USD,,
+Dividend (Ordinary),2023-02-17 13:58:57,US0378331005,AAPL,Apple,,,0.4,0.1955,USD,Not available,,,0.07,EUR,0.01,USD,,
+Dividend (Dividend),2023-11-16 13:23:58,US0378331005,AAPL,Apple,,,0.4,0.204,USD,Not available,,,0.08,EUR,0.01,USD,,
+Dividend (Dividend),2023-12-11 14:33:19,US1667641005,CVX,Chevron,,,0.2,1.2835,USD,Not available,,,0.24,EUR,0.05,USD,,
+Market buy,2023-10-30 13:31:48,US1667641005,CVX,Chevron,,EOF5400013546,0.2,146.0,USD,1.06027596,,EUR,27.58,EUR,,,0.04,EUR
+Dividend (Ordinary),2023-05-19 11:03:28,US0378331005,AAPL,Apple,,,0.4,0.204,USD,Not available,,,0.08,EUR,0.01,USD,,
+Dividend (Dividends paid by us corporations),2023-08-01 14:55:10,US00206R1023,T,AT&T,,,0.5,0.235875,USD,Not available,,,0.11,EUR,0.02,USD,,
+Market sell,2023-04-24 12:50:30,GB00B7KR2P84,EZJ,easyJet,,EOF2376035392,2.0,506.0,GBX,88.46153846,-0.98,EUR,11.42,EUR,,,0.02,EUR
+Market buy,2023-10-30 13:30:02,US5494981039,LCID,Lucid,,EOF5350546902,5.0,4.11,USD,1.05982465,,EUR,19.42,EUR,,,0.03,EUR
+Dividend (Dividend),2023-11-01 10:10:21,US92343V1044,VZ,Verizon Communications,,,0.705518,0.56525,USD,Not available,,,0.38,EUR,0.07,USD,,
+Deposit,2023-07-04 15:04:35,,,,Transaction ID: CHFN6WZ39CGGX632,5be6dec7-44ef-44a6-a7ff-f201114a62e0,,,,,,,40.0,EUR,,,,
+Interest on cash,2023-10-29 22:07:14,,,,Interest on cash,b60f937d-fee8-49cd-9f5b-b2973b86c014,,,,,,,0.01,EUR,,,,
+Dividend (Dividends paid by us corporations),2023-08-17 10:47:06,US0378331005,AAPL,Apple,,,0.4,0.204,USD,Not available,,,0.08,EUR,0.01,USD,,
+Deposit,2023-05-19 08:45:41,,,,Transaction ID: ZCSXH23RVXMBFF32,02acea93-4f7e-4083-9cff-4aa1e2e22655,,,,,,,50.0,EUR,,,,
