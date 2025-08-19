@@ -21,14 +21,14 @@
 
 (defn add-trx-to-record
   "Converts parsed transaction map to Transaction record and adds to collection"
-  [transactions trx-map]
-  (let [transaction-record (->Transaction
-                            (:time trx-map)
-                            (:action trx-map)
-                            (:ticker trx-map)
-                            (:quantity trx-map)
-                            (:price trx-map))]
-    (conj transactions transaction-record)))
+  [transactions trnx-map]
+  (let [new-transaction-record (->Transaction
+                                (:time trnx-map)
+                                (:type trnx-map)
+                                (:ticker trnx-map)
+                                (:no-of-shares trnx-map)
+                                (:total trnx-map))]
+    (conj transactions new-transaction-record)))
 
 (defn sanitize-header-name
   "Header can have whitespace or symobols e.g / . ( ) etc. Replace them with hyphen and remove them where possible."
