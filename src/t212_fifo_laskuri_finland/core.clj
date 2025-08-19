@@ -19,7 +19,7 @@
       (str/includes? action "sell") (assoc transaction :type "sell")
       :else nil)))
 
-(defn add-trx-to-record
+(defn add-transaction-to-record
   "Converts parsed transaction map to Transaction record and adds to collection"
   [transactions trnx-map]
   (let [new-transaction-record (->Transaction
