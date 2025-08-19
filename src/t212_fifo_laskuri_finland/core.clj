@@ -54,10 +54,10 @@
     (let [csv (doall (csv/read-csv reader))
           [header & rows] csv
           keyworded-header (map sanitize-header-name header)
-          csv-row-map (map #(zipmap keyworded-header %) rows)]
-      csv-row-map
-    )) 
-)
+          csv-row-map (map #(zipmap keyworded-header %) rows)
+          filtered-transactions (keep filter-transaction csv-row-map)
+          transaction-record (reduce add-transaction-to-record [] filtered-transactions)]
+      transaction-record)))
 
 ;; --- FIFO Logic ---
 (defn add-purchase
