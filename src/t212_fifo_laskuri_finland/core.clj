@@ -10,21 +10,14 @@
 (defrecord Sale [symbol quantity sold-price cost-basis gain-loss date])
 
 ;; --- Utility functions ---
-(defn map-action-type-to-string
-  "Take action type from the CSV format and return either string 'buy' or 'sell' based on 'Market buy' or 'Market sell'"
-  [action]
-  ({"Market buy" "buy" "Market sell" "sell"} action))
-
-(defn parse-trx
-  "Parse each line of the CSV. Destructure the values. Pass them on."
-  [line]
-  (let [[action time _isin ticker _name _notes _id quantity price _currency & _rest] line]
-    (when (#{"Market buy" "Market sell"} action)
-      {:action (map-action-type-to-string action)
-       :time time
-       :ticker ticker
-       :quantity (Double/parseDouble quantity)
-       :price (Double/parseDouble price)})))
+(defn filter-transaction
+  "From a CSV row map, filter out only buy or sell transcations and add a new field :type based on the action e.g Market Sell -> sell"
+  [transaction]
+  (let [action (:action transaction)]
+    (cond
+      (str/includes? action "buy") (assoc transaction :type "buy")
+      (str/includes? action "sell") (assoc transaction :type "sell")
+      :else nil)))
 
 (defn add-trx-to-record
   "Converts parsed transaction map to Transaction record and adds to collection"
