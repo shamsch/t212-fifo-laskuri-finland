@@ -26,8 +26,8 @@
                                 (:time trnx-map)
                                 (:type trnx-map)
                                 (:ticker trnx-map)
-                                (:no-of-shares trnx-map)
-                                (:total trnx-map))]
+                                (Double/parseDouble (:no-of-shares trnx-map))
+                                (Double/parseDouble (:total trnx-map)))]
     (conj transactions new-transaction-record)))
 
 (defn sanitize-header-name
