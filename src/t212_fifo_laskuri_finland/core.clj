@@ -7,7 +7,7 @@
 ;; --- Data structures ---
 (defrecord Transaction [date type symbol quantity price])
 (defrecord Lot [quantity price date])
-(defrecord Sale [symbol quantity sold-price cost-basis gain-loss date])
+(defrecord Sale [symbol quantity sold-price date])
 
 ;; --- Utility functions ---
 (defn filter-transaction
