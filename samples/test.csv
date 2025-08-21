@@ -1,0 +1,11 @@
+Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Price / share),Exchange rate,Result,Currency (Result),Total,Currency (Total),Withholding tax,Currency (Withholding tax),Stamp duty reserve tax,Currency (Stamp duty reserve tax),Currency conversion fee,Currency (Currency conversion fee)
+Deposit,2023-01-01 09:00:00,,,,Bank Transfer,dep1,,,,,,,1000.0,EUR,,,,,,
+Market buy,2023-01-02 10:00:00,US0378331005,AAPL,Apple,Buy Order 1,txn1,10.0,150.0,USD,1.0,,EUR,1500.0,EUR,,,,,0.5,EUR
+Market buy,2023-01-03 11:00:00,US0378331005,AAPL,Apple,Buy Order 2,txn2,5.0,160.0,USD,1.0,,EUR,800.0,EUR,,,,,0.3,EUR
+Market buy,2023-01-04 12:00:00,US88160R1014,TSLA,Tesla,Buy Order 1,txn3,8.0,200.0,USD,1.0,,EUR,1600.0,EUR,,,,,0.6,EUR
+Market buy,2023-01-05 13:00:00,US88160R1014,TSLA,Tesla,Buy Order 2,txn4,3.0,220.0,USD,1.0,,EUR,660.0,EUR,,,,,0.3,EUR
+Market buy,2023-01-06 14:00:00,US5949181045,MSFT,Microsoft,Buy Order 1,txn5,6.0,250.0,USD,1.0,,EUR,1500.0,EUR,,,,,0.5,EUR
+Market sell,2023-02-01 15:00:00,US0378331005,AAPL,Apple,Partial Sale,txn6,7.0,180.0,USD,1.0,260.0,EUR,1260.0,EUR,,,,,0.4,EUR
+Market sell,2023-02-02 16:00:00,US88160R1014,TSLA,Tesla,Partial Sale,txn7,5.0,240.0,USD,1.0,400.0,EUR,1200.0,EUR,,,,,0.4,EUR
+Dividend (Ordinary),2023-03-01 12:00:00,US0378331005,AAPL,Apple,Quarterly Dividend,div1,8.0,0.23,USD,1.0,,,1.84,EUR,0.28,USD,,,,
+Market sell,2023-03-15 17:00:00,US5949181045,MSFT,Microsoft,Complete Sale,txn8,6.0,280.0,USD,1.0,180.0,EUR,1680.0,EUR,,,,,0.5,EUR
