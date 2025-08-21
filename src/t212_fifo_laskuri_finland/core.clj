@@ -125,14 +125,15 @@
 
 (defn calculate-sale-records
   "Update sales records based on the sold lots."
-  [positions txn])
+  [txn]
+  [(->Sale (:symbol txn) (:quantity txn) (:price txn) (:date txn))])
 
 (defn process-sale
   "Take a sale transaction, update positions and sales records."
   [state txn]
   (-> state
       (assoc :positions (process-fifo-lots (:positions state) txn))
-      (update :sales into (calculate-sale-records (:positions state) txn))))
+      (update :sales into (calculate-sale-records txn))))
 
 (defn calculate-fifo
   "Process transactions chronologically to calculate FIFO gains/losses."
