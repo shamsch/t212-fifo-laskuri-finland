@@ -168,9 +168,14 @@
 ;; --- REPL playground ---
 (comment
   ;; loading csv file
-  (def sample-file "samples/2022.csv")
-  (load-transactions sample-file)
-
+  (def sample-file "samples/test.csv")
+  (def transactions (load-transactions sample-file))
+  
+  ;; test complete FIFO calculation
+  (def fifo-results (calculate-fifo transactions))
+  (println "Positions:" (:positions fifo-results))
+  (println "Sales:" (:sales fifo-results))
+  
   ;; testing consuming lot
   (def test-lots [{:ticker "AAPL" :quantity 30 :price 100 :date "2023-01-01"}
                   {:ticker "AAPL" :quantity 40 :price 110 :date "2023-01-02"}
