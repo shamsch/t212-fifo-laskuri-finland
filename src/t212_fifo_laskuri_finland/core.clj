@@ -65,12 +65,12 @@
   [positions txn]
   ;; get all the info out of txn 
   (let [symbol (:symbol txn)
-        new-lot (-> Lot
+          new-lot (->Lot
                     (:quantity txn)
                     (:price txn)
                     (:date txn))
-        exisiting-lot (get positions symbol [])]
-    (assoc positions symbol (conj exisiting-lot new-lot))))
+        exisiting-lots (get positions symbol [])]
+    (assoc positions symbol (conj exisiting-lots new-lot))))
 
 
 (defn consume-lots
