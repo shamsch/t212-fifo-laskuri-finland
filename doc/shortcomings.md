@@ -10,10 +10,11 @@
   **Reason**: Missing others like "Limit buy" "Stop Limit Sell" etc. Check samples for better idea. 
   **Solution**: Handle all buy/sell order types
 
-- [ ] **All Fees & Costs Not Added to Cost Basis**  
+- [x] **All Fees & Costs Not Added to Cost Basis**  
   **Problem**: Code ignores all additional costs beyond share price  
   **Reason**: All fees/taxes must be added to cost basis for accurate calculations  
-  **Solution**: Add all applicable fees, duties, and taxes to Total for true cost basis
+  **Solution**: Add all applicable fees, duties, and taxes to Total for true cost basis  
+  *Resolved: Trading 212's Total field already includes all fees, duties, and currency conversion costs*
 
 - [ ] **Code Organization**  
   **Problem**: Everything in single core.clj file, getting unwieldy  
