@@ -75,31 +75,34 @@
 
 (defn consume-lots
   "Consume lots based on the quantity needed.
-   Return remaining lots after fulfilling the quantity, or empty if fully consumed."
+   Return map with :remaining-lots and :consumed-lots."
   [lots quantity-sold]
   (loop [remaining-lots lots
          quanity-left-to-be-sold quantity-sold
-         result []]
-    ;; when either "nothing left to consume" or "no more lots"
+         consumed []]
+    ;; when either "nothing left to consume" or "no more lots remaining to be sold"
     (if (or (<= quanity-left-to-be-sold 0) (empty? remaining-lots))
-      (into result remaining-lots)
+      {:remaining-lots remaining-lots
+       :consumed-lots consumed}
       (let [lot (first remaining-lots)
             available-quantity (:quantity lot)]
         (cond
-          ;; exact match - consume entire lot, add remaining lots to result
+          ;; exact match - consume entire lot
           (= available-quantity quanity-left-to-be-sold)
-          (into result (rest remaining-lots))
+          {:remaining-lots (rest remaining-lots)
+           :consumed-lots (conj consumed lot)}
 
-          ;; partial consumption - reduce lot quantity, add it and remaining lots to result
+          ;; partial consumption - split the lot
           (> available-quantity quanity-left-to-be-sold)
-          (into (conj result (update lot :quantity - quanity-left-to-be-sold))
-                (rest remaining-lots))
+          (let [consumed-portion (assoc lot :quantity quanity-left-to-be-sold)
+                remaining-portion (update lot :quantity - quanity-left-to-be-sold)]
+            {:remaining-lots (cons remaining-portion (rest remaining-lots))
+             :consumed-lots (conj consumed consumed-portion)})
 
-          ;; consume entire lot, continue with rest of lot and reduce quantity left to be sold by available quantity
-          ;; which just got consumed
+          ;; consume entire lot, continue with rest
           :else (recur (rest remaining-lots)
                        (- quanity-left-to-be-sold available-quantity)
-                       result))))))
+                       (conj consumed lot)))))))
 
 (defn process-fifo-lots
   "Process FIFO lots for a sale transaction.
