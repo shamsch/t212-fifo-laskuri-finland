@@ -5,7 +5,7 @@
   **Reason**: This is a very weak, flimsy approach. Also weeds out fields that might be of use. 
   **Solution**: Create a map of key value for every field available in the CSV
 
-- [ ] **Transaction Types Incomplete**  
+- [x] **Transaction Types Incomplete**  
   **Problem**: Only handles "Market buy/sell"  
   **Reason**: Missing others like "Limit buy" "Stop Limit Sell" etc. Check samples for better idea. 
   **Solution**: Handle all buy/sell order types

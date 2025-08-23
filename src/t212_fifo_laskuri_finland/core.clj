@@ -13,9 +13,10 @@
 (defn filter-transaction
   "From a CSV row map, filter out only buy or sell transcations and add a new field :type based on the action e.g Market Sell -> sell"
   [transaction]
-  (let [action (:action transaction)]
-    (cond (str/includes? action "buy") (assoc transaction :type "buy")
-          (str/includes? action "sell") (assoc transaction :type "sell")
+  (let [action (:action transaction) 
+        lowercase-action (str/lower-case action)]
+    (cond (str/includes? lowercase-action "buy") (assoc transaction :type "buy")
+          (str/includes? lowercase-action "sell") (assoc transaction :type "sell")
           :else nil)))
 
 (defn add-transaction-to-record
