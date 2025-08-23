@@ -14,20 +14,19 @@
   "From a CSV row map, filter out only buy or sell transcations and add a new field :type based on the action e.g Market Sell -> sell"
   [transaction]
   (let [action (:action transaction)]
-    (cond
-      (str/includes? action "buy") (assoc transaction :type "buy")
-      (str/includes? action "sell") (assoc transaction :type "sell")
-      :else nil)))
+    (cond (str/includes? action "buy") (assoc transaction :type "buy")
+          (str/includes? action "sell") (assoc transaction :type "sell")
+          :else nil)))
 
 (defn add-transaction-to-record
   "Converts parsed transaction map to Transaction record and adds to collection"
   [transactions trnx-map]
   (let [new-transaction-record (->Transaction
-                                (:time trnx-map)
-                                (:type trnx-map)
-                                (:ticker trnx-map)
-                                (Double/parseDouble (:no-of-shares trnx-map))
-                                (Double/parseDouble (:total trnx-map)))]
+                                 (:time trnx-map)
+                                 (:type trnx-map)
+                                 (:ticker trnx-map)
+                                 (Double/parseDouble (:no-of-shares trnx-map))
+                                 (Double/parseDouble (:total trnx-map)))]
     (conj transactions new-transaction-record)))
 
 (defn sanitize-header-name
@@ -35,9 +34,11 @@
   [header]
   (-> header
       str/lower-case
-      (str/replace #"[(){}\\[\\]]" "")  ; remove brackets and parentheses
-      (str/replace #"\s+|/|\." "-")     ; replace whitespace, /, . with hyphens
-      (str/replace #"-+" "-")           ; collapse multiple hyphens to single
+      (str/replace #"[(){}\\[\\]]" "") ; remove brackets and parentheses
+      (str/replace #"\s+|/|\." "-")    ; replace whitespace, /, . with
+                                       ; hyphens
+      (str/replace #"-+" "-")          ; collapse multiple hyphens to
+                                       ; single
       keyword))
 
 ;; --- CSV Parsing ---
@@ -56,19 +57,17 @@
           keyworded-header (map sanitize-header-name header)
           csv-row-map (map #(zipmap keyworded-header %) rows)
           filtered-transactions (keep filter-transaction csv-row-map)
-          transaction-record (reduce add-transaction-to-record [] filtered-transactions)]
+          transaction-record
+            (reduce add-transaction-to-record [] filtered-transactions)]
       transaction-record)))
 
 ;; --- FIFO Logic ---
 (defn add-purchase
   "Add a purchase lot to the positions map for the given transaction."
   [positions txn]
-  ;; get all the info out of txn 
+  ;; get all the info out of txn
   (let [symbol (:symbol txn)
-        new-lot (->Lot
-                 (:quantity txn)
-                 (:price txn)
-                 (:date txn))
+        new-lot (->Lot (:quantity txn) (:price txn) (:date txn))
         exisiting-lots (get positions symbol [])]
     (assoc positions symbol (conj exisiting-lots new-lot))))
 
@@ -80,31 +79,32 @@
   (loop [remaining-lots lots
          quanity-left-to-be-sold quantity-sold
          consumed []]
-    ;; when either "nothing left to consume" or "no more lots remaining to be sold"
+    ;; when either "nothing left to consume" or "no more lots remaining to
+    ;; be sold"
     (if (or (<= quanity-left-to-be-sold 0) (empty? remaining-lots))
-      {:remaining-lots remaining-lots
-       :consumed-lots consumed}
+      {:remaining-lots remaining-lots :consumed-lots consumed}
       (let [lot (first remaining-lots)
             available-quantity (:quantity lot)]
         (cond
           ;; exact match - consume entire lot
           (= available-quantity quanity-left-to-be-sold)
-          {:remaining-lots (rest remaining-lots)
-           :consumed-lots (conj consumed lot)}
-
+            {:remaining-lots (rest remaining-lots)
+             :consumed-lots (conj consumed lot)}
           ;; partial consumption - when more to available than to be sold
           (> available-quantity quanity-left-to-be-sold)
-          (let [price-per-unit (/ (:price lot) (:quantity lot))
-                remaining-quantity (- available-quantity quanity-left-to-be-sold)
-                consumed-portion (assoc lot
-                                        :quantity quanity-left-to-be-sold
-                                        :price (* price-per-unit quanity-left-to-be-sold))
-                remaining-portion (assoc lot
-                                         :quantity remaining-quantity
-                                         :price (* remaining-quantity price-per-unit))]
-            {:remaining-lots (cons remaining-portion (rest remaining-lots))
-             :consumed-lots (conj consumed consumed-portion)})
-
+            (let [price-per-unit (/ (:price lot) (:quantity lot))
+                  remaining-quantity (- available-quantity
+                                        quanity-left-to-be-sold)
+                  consumed-portion (assoc lot
+                                     :quantity quanity-left-to-be-sold
+                                     :price (* price-per-unit
+                                               quanity-left-to-be-sold))
+                  remaining-portion (assoc lot
+                                      :quantity remaining-quantity
+                                      :price (* remaining-quantity
+                                                price-per-unit))]
+              {:remaining-lots (cons remaining-portion (rest remaining-lots))
+               :consumed-lots (conj consumed consumed-portion)})
           ;; consume entire lot, continue with rest
           :else (recur (rest remaining-lots)
                        (- quanity-left-to-be-sold available-quantity)
@@ -122,9 +122,12 @@
         lots (get positions symbol [])]
     (if (empty? lots)
       ;; when something is sold without no lots as in no purchase data
-      (do
-        (println "WARNING: incomplete data, sold " (:quantity txn) " of " (:symbol txn) " without available buying data.")
-        {:positions positions :consumed-lots []})
+      (do (println "WARNING: incomplete data, sold "
+                   (:quantity txn)
+                   " of "
+                   (:symbol txn)
+                   " without available buying data.")
+          {:positions positions :consumed-lots []})
       ;; process the sale against lots
       (let [{:keys [remaining-lots consumed-lots]} (consume-lots lots sale-qty)
             updated-positions (if (empty? remaining-lots)
@@ -138,12 +141,18 @@
   [txn consumed-lots]
   (let [total-cost-basis (reduce + (map :price consumed-lots))
         gain-loss (- (:price txn) total-cost-basis)]
-    [(->Sale (:symbol txn) (:quantity txn) (:price txn) (:date txn) total-cost-basis gain-loss)]))
+    [(->Sale (:symbol txn)
+             (:quantity txn)
+             (:price txn)
+             (:date txn)
+             total-cost-basis
+             gain-loss)]))
 
 (defn process-sale
   "Take a sale transaction, update positions and sales records."
   [state txn]
-  (let [{:keys [positions consumed-lots]} (process-fifo-lots (:positions state) txn)]
+  (let [{:keys [positions consumed-lots]} (process-fifo-lots (:positions state)
+                                                             txn)]
     (-> state
         (assoc :positions positions)
         (update :sales into (calculate-sale-records txn consumed-lots)))))
@@ -151,23 +160,21 @@
 (defn calculate-fifo
   "Process transactions chronologically to calculate FIFO gains/losses."
   [transactions]
-  (reduce
-   (fn [state txn]
-     (case (:type txn)
-       "buy"  (update state :positions add-purchase txn)
-       "sell" (process-sale state txn)
-       state))
-   {:positions {} :sales []}
-   transactions))
+  (reduce (fn [state txn]
+            (case (:type txn)
+              "buy" (update state :positions add-purchase txn)
+              "sell" (process-sale state txn)
+              state))
+    {:positions {} :sales []}
+    transactions))
 
 ;; --- Reporting ---
 (defn get-tax-rate
   "Determine the tax rate based on total sale amount"
   [total-sales-amount]
-  (cond
-    (< total-sales-amount 1001) 0
-    (< total-sales-amount 30001) 0.30
-    :else 0.34))
+  (cond (< total-sales-amount 1001) 0
+        (< total-sales-amount 30001) 0.30
+        :else 0.34))
 
 (defn get-taxes-owed
   "Give total sales amount and total gain-loss, return taxes owed"
@@ -190,16 +197,15 @@
         total-sale-amount (reduce + (map :sold-price sales))
         tax-rate (get-tax-rate total-sale-amount)
         taxes-owed (get-taxes-owed total-gain-loss total-sale-amount)]
-    (println
-     "You owe total tax of"
-     taxes-owed
-     "after a gain/loss of"
-     total-gain-loss
-     "from a total sale of"
-     total-sale-amount
-     "at a rate of"
-     tax-rate
-     "% for the year! :))")))
+    (println "You owe total tax of"
+             taxes-owed
+             "after a gain/loss of"
+             total-gain-loss
+             "from a total sale of"
+             total-sale-amount
+             "at a rate of"
+             tax-rate
+             "% for the year! :))")))
 
 
 ;; --- CLI entry point ---
@@ -224,9 +230,10 @@
   (print-summary fifo-results)
   (println "Positions:" (:positions fifo-results))
   (println "Sales:" (:sales fifo-results))
-
   ;; testing consuming lot
-  (def test-lots [{:ticker "AAPL" :quantity 30 :price 100 :date "2023-01-01"}
-                  {:ticker "AAPL" :quantity 40 :price 110 :date "2023-01-02"}
-                  {:ticker "AAPL" :quantity 20 :price 120 :date "2023-01-03"}])
-  (consume-lots test-lots 60))
+  (def test-lots
+    [{:ticker "AAPL" :quantity 30 :price 100 :date "2023-01-01"}
+     {:ticker "AAPL" :quantity 40 :price 110 :date "2023-01-02"}
+     {:ticker "AAPL" :quantity 20 :price 120 :date "2023-01-03"}])
+  (consume-lots test-lots 60)
+  )
