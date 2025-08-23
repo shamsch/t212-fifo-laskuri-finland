@@ -65,10 +65,10 @@
   [positions txn]
   ;; get all the info out of txn 
   (let [symbol (:symbol txn)
-          new-lot (->Lot
-                    (:quantity txn)
-                    (:price txn)
-                    (:date txn))
+        new-lot (->Lot
+                 (:quantity txn)
+                 (:price txn)
+                 (:date txn))
         exisiting-lots (get positions symbol [])]
     (assoc positions symbol (conj exisiting-lots new-lot))))
 
@@ -92,10 +92,16 @@
           {:remaining-lots (rest remaining-lots)
            :consumed-lots (conj consumed lot)}
 
-          ;; partial consumption - split the lot
+          ;; partial consumption - when more to available than to be sold
           (> available-quantity quanity-left-to-be-sold)
-          (let [consumed-portion (assoc lot :quantity quanity-left-to-be-sold)
-                remaining-portion (update lot :quantity - quanity-left-to-be-sold)]
+          (let [price-per-unit (/ (:price lot) (:quantity lot))
+                remaining-quantity (- available-quantity quanity-left-to-be-sold)
+                consumed-portion (assoc lot
+                                        :quantity quanity-left-to-be-sold
+                                        :price (* price-per-unit quanity-left-to-be-sold))
+                remaining-portion (assoc lot
+                                         :quantity remaining-quantity
+                                         :price (* remaining-quantity price-per-unit))]
             {:remaining-lots (cons remaining-portion (rest remaining-lots))
              :consumed-lots (conj consumed consumed-portion)})
 
@@ -155,12 +161,46 @@
    transactions))
 
 ;; --- Reporting ---
+(defn get-tax-rate
+  "Determine the tax rate based on total sale amount"
+  [total-sales-amount]
+  (cond
+    (< total-sales-amount 1001) 0
+    (< total-sales-amount 30001) 0.30
+    :else 0.34))
+
+(defn get-taxes-owed
+  "Give total sales amount and total gain-loss, return taxes owed"
+  [total-gain-loss total-sales-amount]
+  (if (< total-gain-loss 1)
+    0
+    (let [tax-rate (get-tax-rate total-sales-amount)
+          taxes-owed (* total-gain-loss tax-rate)]
+      taxes-owed)))
+
 (defn print-summary
-  "Print results: total gain/loss per symbol and remaining positions.
-   TODO: group and sum sales, calculate avg cost for positions."
+  "
+   Show total gain loss. 
+   Show tax owed based on that taking into account the amount of sale and tax rate
+  "
   [results]
   ;; TODO: implement
-  (println "Not yet implemented."))
+  (let [sales (:sales results)
+        total-gain-loss (reduce + (map :gain-loss sales))
+        total-sale-amount (reduce + (map :sold-price sales))
+        tax-rate (get-tax-rate total-sale-amount)
+        taxes-owed (get-taxes-owed total-gain-loss total-sale-amount)]
+    (println
+     "You owe total tax of"
+     taxes-owed
+     "after a gain/loss of"
+     total-gain-loss
+     "from a total sale of"
+     total-sale-amount
+     "at a rate of"
+     tax-rate
+     "% for the year! :))")))
+
 
 ;; --- CLI entry point ---
 (defn -main
@@ -177,12 +217,14 @@
   ;; loading csv file
   (def sample-file "samples/test.csv")
   (def transactions (load-transactions sample-file))
-  
+  transactions
   ;; test complete FIFO calculation
   (def fifo-results (calculate-fifo transactions))
+  fifo-results
+  (print-summary fifo-results)
   (println "Positions:" (:positions fifo-results))
   (println "Sales:" (:sales fifo-results))
-  
+
   ;; testing consuming lot
   (def test-lots [{:ticker "AAPL" :quantity 30 :price 100 :date "2023-01-01"}
                   {:ticker "AAPL" :quantity 40 :price 110 :date "2023-01-02"}
