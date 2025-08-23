@@ -108,7 +108,7 @@
   "Process FIFO lots for a sale transaction.
    Takes current positions and a sell transaction.
    Matches sale quantity against oldest lots for the symbol.
-   Returns updated positions with lots removed/reduced."
+   Returns map with :positions (updated) and :consumed-lots."
   [positions txn]
   ;; get ticker, quantity, and all the lots available for the symbol
   (let [symbol (:symbol txn)
@@ -118,25 +118,29 @@
       ;; when something is sold without no lots as in no purchase data
       (do
         (println "WARNING: incomplete data, sold " (:quantity txn) " of " (:symbol txn) " without available buying data.")
-        positions)
+        {:positions positions :consumed-lots []})
       ;; process the sale against lots
-      (let [updated-lots (consume-lots lots sale-qty)]
-        (if (empty? updated-lots)
-          (dissoc positions symbol)
-          (assoc positions symbol updated-lots))))))
+      (let [{:keys [remaining-lots consumed-lots]} (consume-lots lots sale-qty)
+            updated-positions (if (empty? remaining-lots)
+                                (dissoc positions symbol)
+                                (assoc positions symbol remaining-lots))]
+        {:positions updated-positions :consumed-lots consumed-lots}))))
 
 
 (defn calculate-sale-records
-  "Update sales records based on the sold lots."
-  [txn]
-  [(->Sale (:symbol txn) (:quantity txn) (:price txn) (:date txn))])
+  "Update sales records based on the sold lots and calculate gain/loss."
+  [txn consumed-lots]
+  (let [total-cost-basis (reduce + (map :price consumed-lots))
+        gain-loss (- (:price txn) total-cost-basis)]
+    [(->Sale (:symbol txn) (:quantity txn) (:price txn) (:date txn) total-cost-basis gain-loss)]))
 
 (defn process-sale
   "Take a sale transaction, update positions and sales records."
   [state txn]
-  (-> state
-      (assoc :positions (process-fifo-lots (:positions state) txn))
-      (update :sales into (calculate-sale-records txn))))
+  (let [{:keys [positions consumed-lots]} (process-fifo-lots (:positions state) txn)]
+    (-> state
+        (assoc :positions positions)
+        (update :sales into (calculate-sale-records txn consumed-lots)))))
 
 (defn calculate-fifo
   "Process transactions chronologically to calculate FIFO gains/losses."
