@@ -21,15 +21,34 @@
   **Reason**: Hard to maintain, test, and understand as features grow  
   **Solution**: Split into logical namespaces: csv parsing, FIFO logic, tax calculations, reporting
 
+- [ ] **Detailed Tax Reporting Fields Missing**  
+  **Problem**: Only tracks basic gain/loss, missing required tax reporting details  
+  **Reason**: Finnish tax authorities require detailed breakdown: Security Name, ISIN, Number Sold, Date of Sale, Selling Price, Sale Expenses, Date of Purchase, Acquisition Cost, Purchase Expenses, Calculation Method, Calculated Gain/Loss  
+  **Solution**: Update Transaction/Sale records to capture all required fields, enhance print-summary to output proper tax report format
+
+- [ ] **Configurable Field Aggregation with Currency Conversion**  
+  **Problem**: Expense/fee calculations hardcode which CSV fields to sum instead of using configurable field groups  
+  **Reason**: Computing total expenses requires summing multiple CSV fields with different currencies and applying exchange rates. Hardcoded field selection makes it impossible to adapt to CSV changes or user preferences without code modifications  
+  **Solution**: Define field groupings as external constants that specify which fields to sum with their currencies, allowing parameterized field selection  
+  ```clojure
+  ;; Configurable field groups with currency conversion
+  (def expense-field-groups
+    {:purchase-costs [{:field :stamp-duty-reserve-tax :currency :currency-stamp-duty}
+                      {:field :currency-conversion-fee :currency :currency-conversion-fee}]
+     :sale-costs [{:field :transaction-fee :currency :currency-transaction-fee}]})
+  
+  ;; Usage: (calculate-total-amount csv-row :purchase-costs exchange-rates) -> EUR total
+  ```
+
 - [ ] **Testing Missing**  
   **Problem**: No unit tests for core FIFO logic, tax calculations, or CSV parsing  
   **Reason**: Need confidence that calculations are correct, especially for financial data  
   **Solution**: Add comprehensive test suite covering edge cases, partial sales, tax brackets
 
-- [ ] **Data Validation & Date Handling**  
-  **Problem**: No data validation, string dates with no timezone awareness  
-  **Reason**: Erroneous data could cause crashes, dates are critical for accurate calculations  
-  **Solution**: Add input validation and parse dates to proper datetime objects
+- [ ] **Data Validation**  
+  **Problem**: No input validation or data integrity checks before processing  
+  **Reason**: 1) String dates without timezone parsing can cause calculation errors 2) CSV completeness not verified (unmatched buys/sells) 3) Field type validation missing (e.g., ticker as string not number, ISIN format validation, numeric fields as numbers not text)  
+  **Solution**: Add date parsing with timezone handling, CSV integrity validation (warn on orphaned sales), comprehensive field validation for all relevant CSV fields ensuring correct data types and formats
 
 - [ ] **Dividend Income & Withholding Tax Missing**  
   **Problem**: Dividends not processed at all, withholding tax not accounted for  
